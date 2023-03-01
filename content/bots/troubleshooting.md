@@ -25,14 +25,14 @@ To learn how to set up your bot product, refer to [Get started](/bots/get-starte
 
 ___
 
-## Yandex bot unexpectedly blocked by the WAF managed rule with id 100203
+## Yandex bot unexpectedly blocked by the WAF managed rule with ID `...f6cbb163`
 
-Yandex updates their bots very frequently, you may see more false positives while these changes are propagated. New and recently updated bots will occasionally be blocked by Cloudflare WAF managed rule with id 100203, as the IP list of Yandex bots has not yet synced with Yandex's most recent changes.
+Yandex updates their bots very frequently, you may see more false positives while these changes are propagated. New and recently updated bots will occasionally be blocked by Cloudflare WAF managed rule with ID `...f6cbb163`, as the IP list of Yandex bots has not yet synced with Yandex's most recent changes.
 
 **Workarounds:**
 
--   Disable the WAF managed rule with id 100203 temporarily,
--   or create a firewall rule with the _Bypass_ action to bypass WAF managed rules when a request is coming from the **Yandex IP** and the user-agent contains **Yandex.** Refer to our [Firewall actions](/firewall/cf-firewall-rules/actions).
+- Disable the WAF managed rule with ID `...f6cbb163` temporarily.
+- Alternatively, create a custom rule with the _Skip_ action to bypass WAF managed rules when a request is coming from the **Yandex IP** and the user-agent contains **Yandex.** Refer to [Configure a custom rule with the Skip action](/waf/custom-rules/skip/).
 
 **Solution:**
 
@@ -50,11 +50,11 @@ Cloudflare uses data from millions of requests and re-train the system on a peri
 
 ___
 
-## Why am I seeing a Managed Challenge action for firewall rules?
+## Why am I seeing a Managed Challenge action for WAF custom rules?
 
-When you choose to challenge different bot categories with Bot Fight Mode or Super Bot Fight Mode, you will see Firewall Events with an **Action Taken** of **Managed Challenge**.
+When you choose to challenge different bot categories with Bot Fight Mode or Super Bot Fight Mode, you will see Security Events with an **Action Taken** of **Managed Challenge**.
 
-You may also see Managed Challenge as a result of a [firewall rule](https://support.cloudflare.com/hc/articles/200170136#managed-challenge).
+You may also see Managed Challenge as a result of a [WAF custom rule](/fundamentals/get-started/concepts/cloudflare-challenges/#managed-challenge-recommended).
 
 ___
 
@@ -65,7 +65,7 @@ The difference is significant:
 -   Threat score (_cf.threat\_score_) is what Cloudflare uses to determine IP Reputation. It goes from 0 (good) to 100 (bad).
 -   Bot management score (_cf.bot\_management.score)_ is what Cloudflare uses in Bot Management to measure if the request is from a human or a script**.** The scores range from 1 (bot) to 99 (human). Lower scores indicate the request came from a script, API service, or an automated agent. Higher scores indicate that the request came from a human using a standard desktop or mobile web browser.
 
-These fields are available via [Cloudflare Firewall Rules](/firewall/cf-firewall-rules).
+These fields are available via [WAF custom rules](/waf/custom-rules/) and via other products based on the Ruleset Engine.
 
 ___
 
@@ -77,7 +77,7 @@ Cloudflare has built an allowlist of good, automated bots, e.g. Google Search En
 
 This allowlist is large based on reverse DNS verification, meaning that the IPs we allow really match the requesting service. In addition to this, Cloudflare uses multiple validation methods including ASN blocks and public lists. If none of these validation types are available for a customer, we use internal Cloudflare data and machine learning to identify legitimate IP addresses from good bots.
 
-To allow traffic from good bots, use the [Verified Bot](/ruleset-engine/rules-language/fields#dynamic-fields) field in your firewall rule.
+To allow traffic from good bots, use the [Verified Bot](/ruleset-engine/rules-language/fields#dynamic-fields) field in your WAF custom rule.
 
 ___
 
@@ -95,10 +95,10 @@ If you are experiencing errors with your bot solution and need to submit a Suppo
 
 {{<Aside type="warning">}}
 
-The following information gathering are required when you are experiencing issues (e.g. false positives) with Enterprise Bot Management only (Enterprise plan). 
-    
+The following information gathering are required when you are experiencing issues (e.g. false positives) with Enterprise Bot Management only (Enterprise plan).
+
 Because Bot Fight Mode (BFM) and Super Bot Fight Mode (SBFM) are set at a domain level, we often find that disabling these features is the best solution to false positives.
-    
+
 Please follow instructions in the following questions on how to disable BFM and SBFM features. We conduct more thorough investigations for Enterprise Bot Management.
 
 {{</Aside>}}
@@ -108,7 +108,7 @@ Please follow instructions in the following questions on how to disable BFM and 
 -   Firewall Rule IDs, rule expression, Challenge solve rates
 -   Common user-agents among false positives
 -   Common ASNs among false positives
--   Screenshots of strange activity from the firewall, such as a huge spike in challenged traffic on the graph
+-   Screenshots of strange activity from the WAF, such as a huge spike in challenged traffic on the graph
 -   Problematic URIs or paths
 -   Rough description of how your domain is configured.
     -   Is one zone SSL for SaaS while the others are not?
