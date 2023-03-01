@@ -6,7 +6,7 @@ weight: 7
 
 # Challenge Passage
 
-When a visitor solves a [Cloudflare challenge](/fundamentals/get-started/concepts/cloudflare-challenges/) - as part of a [Firewall rule](/firewall/cf-firewall-rules/) or [IP access rule](/waf/tools/ip-access-rules/) - you can set the **Challenge Passage** to prevent them from having to solve future challenges for a specified period of time.
+When a visitor solves a [Cloudflare challenge](/fundamentals/get-started/concepts/cloudflare-challenges/) - as part of a [WAF custom rule](/waf/custom-rules/) or [IP Access rule](/waf/tools/ip-access-rules/) - you can set the **Challenge Passage** to prevent them from having to solve future challenges for a specified period of time.
 
 ## How it works
 
